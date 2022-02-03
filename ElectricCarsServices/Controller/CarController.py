@@ -14,7 +14,9 @@ class CarController(object):
         cursor = cls.collection.find({}, {'_id': False})
         if limit:
             cursor.limit(max(0, limit))
-        return {"data": list(cursor)}
+        data: list = list(cursor)
+        return {"data": data,
+                "size": len(data)}
 
 
     @classmethod #GET
