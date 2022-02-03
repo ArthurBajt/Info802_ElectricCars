@@ -10,7 +10,7 @@ class AbstractData(ABC):
         """ Parse the instance to a dictionnary """
         return {}
 
-    @staticmethod
+
     @classmethod
     @abstractmethod
     def dict_to_instance(cls, data: dict):

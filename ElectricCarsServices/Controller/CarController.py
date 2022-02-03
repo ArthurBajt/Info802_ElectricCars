@@ -1,5 +1,3 @@
-import json
-
 from .DataBase import db
 from pymongo import ASCENDING, DESCENDING
 from pymongo.database import Collection
@@ -14,6 +12,8 @@ class CarController(object):
     @classmethod #GET
     def get(cls, limit: int = None) -> dict:
         cursor = cls.collection.find({}, {'_id': False})
+        if limit:
+            cursor.limit(max(0, limit))
         return {"data": list(cursor)}
 
 
