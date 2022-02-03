@@ -11,9 +11,9 @@
 
         {% for c in data.cars.data %}
             <div class="row m-2 p-2 border">
-                <div class="col">
-                    {{ c.name }}
-                </div>
+                <div class="col px-1">{{ c.name }}</div>
+                <div class="col px-1">{{ c.maker }}</div>
+                <div class="col px-1">{{ c.price }} €</div>
             </div>
         {% endfor %}
 
