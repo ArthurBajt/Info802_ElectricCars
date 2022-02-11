@@ -12,19 +12,12 @@ def home():
     return render_template("index.html", data=data)
 
 
-@app.route('/test_services')
-def test_services():
-    services: list[dict] = [
-        {"name": "Ride Time", "url": url_for("Ride.time")}
-    ]
-
-    data: dict = {"cars": CarController.get(),
-                  "services": services}
-
-    return render_template("test_services.html", data=data)
-
-
 @app.route('/help')
 def help():
     return render_template("help.html")
+
+
+@app.route('/map')
+def map():
+    return render_template("map.html")
 

@@ -1,5 +1,9 @@
+from requests import get, post, Response
+
+
 class RideController(object):
 
+    URL_POINT_TO_POINT: str = "http://router.project-osrm.org/route/v1/driving/{},{};{},{}"
 
     @classmethod
     def ride_time(cls, car_autonomy: float, recharge_time: float, average_speed: float, lenght: float) -> dict:
@@ -21,3 +25,20 @@ class RideController(object):
             "pauses": pauses
         }
         return res
+
+
+    @classmethod
+    def distance_between_point(cls, from_latitude: float, from_longitude: float, to_latitude: float, to_longitude: float) -> float:
+        """
+        Gives the shortest road distance between 2 point
+        :param a: the cordinates from where you start
+        :param b: the cordinates of where you are going
+        :return: the road distance in kilometer between two point, -1.0 if there not route possible
+        """
+        res: Response = get(cls.URL_POINT_TO_POINT.format(from_latitude, from_longitude, to_latitude, to_longitude))
+        if res.status_code == 200:
+            res_json: dict = res.json()
+            if res_json["code"] == "Ok":
+                if len(res_json["routes"]) > 0:
+                    return float(res_json["routes"][0]["legs"][0]["distance"] / 1000.0)
+        return -1.0
