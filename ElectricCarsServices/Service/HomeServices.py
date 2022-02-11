@@ -22,3 +22,9 @@ def test_services():
                   "services": services}
 
     return render_template("test_services.html", data=data)
+
+
+@app.route('/help')
+def help():
+    return render_template("help.html")
+
