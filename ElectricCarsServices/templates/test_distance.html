@@ -1,22 +1,17 @@
 {% extends "base.html" %}
 
-
-{% block title %}Services{% endblock %}
+{% block title %}Distance{% endblock %}
 
 
 {% block main %}
 
     <div class="m-2">
         <form method="post">
-            <p>Car autonomy: <input value="0" min="0" name="car_autonomy"></p>
-            <p>Charge Time: <input value="0" min="0" name="car_charge_time"></p>
-            <p>Average Speed: <input value="0" min="0" name="car_average_speed"></p>
-            <p>Journey lenght: <input value="0" min="0" name="length"></p>
+            <p>From : <input value="0" min="0" name="from_latitude"> ; <input value="0" min="0" name="from_longitude"></p>
+            <p>To : <input value="0" min="0" name="to_latitude"> ; <input value="0" min="0" name="to_longitude"></p>
 
             <div class="row m-2 p-2">
-                {% for service in data.services %}
-                    <input class="col px-1 mx-1" type="submit" value="{{ service.name }}" formaction="{{ service.url }}">
-                {% endfor %}
+                <input class="col px-1 mx-1" type="submit" value="" formaction="{{ url_for("Ride.distance") }}">
             </div>
         </form>
     </div>

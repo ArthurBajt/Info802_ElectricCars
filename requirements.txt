@@ -3,3 +3,4 @@ Faker~=9.9.0
 pymongo~=4.0.1
 dnspython
 gunicorn
+requests
