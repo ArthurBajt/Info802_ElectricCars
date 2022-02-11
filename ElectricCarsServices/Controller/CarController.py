@@ -20,14 +20,19 @@ class CarController(object):
 
 
     @classmethod #GET
-    def find(cls) -> dict:
-        data: dict = {}
-        return {"data": data}
+    def find(cls, name: str) -> dict:
+        cursor = cls.collection.find({"name": name}, {'_id': False}).limit(1)
+        if len(list(cursor)) > 0:
+            return {"data": list(cursor)[0]}
+        return {}
 
 
     @classmethod #POST
-    def add(cls):
-        pass
+    def add(cls, name: str, maker: str, year: int, range: float, price: float, charge_time: float):
+        cursor = cls.collection.find({"name": name}, {'_id': False})
+        if len(list(cursor)) < 1:
+            car: Car = Car(name, maker, year, range, price, charge_time)
+            cls.collection.insert_one(car.to_dict())
 
 
     @classmethod #PUT
@@ -36,8 +41,10 @@ class CarController(object):
 
 
     @classmethod #DELETE
-    def remove(cls):
-        pass
+    def remove(cls, name: str):
+        cursor = cls.collection.find({"name": name}).limit(1)
+        if cursor.get("_id"):
+            cls.collection.delete_one({"_id": cursor.get("_id")})
 
 
     @classmethod

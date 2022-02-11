@@ -16,21 +16,4 @@
         </form>
     </div>
 
-
-    <div class="border m-1 p-4">
-        <div class="row py-3">
-            <h4 class="col border">Car</h4>
-            <h4 class="col border">Charge Time</h4>
-            <h4 class="col border">Autonomy</h4>
-        </div>
-
-        {% for car in data.cars.data %}
-            <div class="row">
-                <div class="col border">{{ car.name }}</div>
-                <div class="col border">{{ car.charge_time }}</div>
-                <div class="col border">{{ car.range }}</div>
-            </div>
-        {% endfor %}
-    </div>
-
 {% endblock %}

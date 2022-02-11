@@ -3,6 +3,7 @@ from unittest import TestCase
 from faker import Faker
 
 from ElectricCarsServices.Model import Car
+from ElectricCarsServices.Controller import CarController
 
 
 class TestCar(TestCase):
@@ -38,3 +39,9 @@ class TestCar(TestCase):
         fake: Faker = Faker()
         car: Car = Car.fake(fake)
         self.assertTrue(car != None)
+
+
+    def test_add_car(self):
+        car_name: str = "A TEST CAR"
+        # CarController.add(car_name, "", 0000, 0.0, 0.0, 0.0)
+        self.assertTrue(car_name, CarController.find(car_name)["data"]["name"])
