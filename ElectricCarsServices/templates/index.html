@@ -9,11 +9,21 @@
 
     <div class="col center justify m-5">
 
+        <div class="row m-2 p-2 border fs-4">
+            <div class="col px-1">Model</div>
+            <div class="col px-1">Maker</div>
+            <div class="col px-1">Price</div>
+            <div class="col px-1">Range</div>
+            <div class="col px-1">Charge Time</div>
+        </div>
+
         {% for c in data.cars.data %}
             <div class="row m-2 p-2 border">
                 <div class="col px-1">{{ c.name }}</div>
                 <div class="col px-1">{{ c.maker }}</div>
                 <div class="col px-1">{{ c.price }} €</div>
+                <div class="col px-1">{{ c.range }} km</div>
+                <div class="col px-1">{{ c.charge_time }} min</div>
             </div>
         {% endfor %}
 
