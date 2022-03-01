@@ -48,16 +48,18 @@ class RideController(object):
     @classmethod
     def car_ride(cls, car_name: str, from_latitude: float, from_longitude: float, to_latitude: float, to_longitude: float):
         car: dict = CarController.find(car_name)['data']
-        print(car)
 
         if car == {}:
             return {"error": "no car found"}
 
         distance: float = cls.distance_between_point(from_latitude, from_longitude, to_latitude, to_longitude)
-        if distance < 0.0:
+        if distance <= 0.0:
             return {"error": "can t go from A to B with a car"}
 
-        res: dict = cls.ride_time(car['range'], car['charge_time'], 100.0, distance)
-        return {"data": {"ride": res,
+        ride_time: dict = cls.ride_time(car['range'], car['charge_time'], 100.0, distance)
+        return {"data": {"ride": ride_time,
+                         "lenght": distance,
                          "car": car,
-                         "speed": 100.0}}
+                         "average_speed": 100.0
+                         }
+                }

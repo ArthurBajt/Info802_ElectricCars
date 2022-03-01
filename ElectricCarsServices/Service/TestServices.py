@@ -5,6 +5,16 @@ from ElectricCarsServices.Controller import CarController
 app: Blueprint = Blueprint('Test', __name__, url_prefix='/test')
 
 
+@app.route('/')
+def testes():
+    links: list = [
+        url_for("Test.time"),
+        url_for("Test.distance"),
+        url_for("Test.car_ride")
+    ]
+    return render_template("test_list.html", data={"links": links})
+
+
 @app.route('/time')
 def time():
     services: list[dict] = [
@@ -26,6 +36,8 @@ def distance():
 
 @app.route('/car_ride')
 def car_ride():
-    data: dict = {"cars": CarController.get()}
+    cars: list = CarController.get()['data']
+    cars = sorted(cars, key=lambda a: a['range'], reverse=False)
+    data: dict = {"cars": cars}
 
     return render_template("test_car_ride.html", data=data)
