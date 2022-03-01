@@ -22,3 +22,14 @@ def distance():
     to_latitude: float = float(request.form.get("to_latitude"))
     to_longitude: float = float(request.form.get("to_longitude"))
     return {"distance": RideController.distance_between_point(from_latitude, from_longitude, to_latitude, to_longitude)}
+
+
+@app.route('/car_ride', methods=['GET', 'POST'])
+def car_ride():
+    from_latitude: float = float(request.form.get("from_latitude"))
+    from_longitude: float = float(request.form.get("from_longitude"))
+    to_latitude: float = float(request.form.get("to_latitude"))
+    to_longitude: float = float(request.form.get("to_longitude"))
+    car_name: str = str(request.form.get("car_name"))
+
+    return RideController.car_ride(car_name, from_latitude, from_longitude, to_latitude, to_longitude)

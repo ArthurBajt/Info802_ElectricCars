@@ -22,3 +22,10 @@ def distance():
     data: dict = {"cars": CarController.get()}
 
     return render_template("test_distance.html", data=data)
+
+
+@app.route('/car_ride')
+def car_ride():
+    data: dict = {"cars": CarController.get()}
+
+    return render_template("test_car_ride.html", data=data)

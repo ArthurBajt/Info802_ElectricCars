@@ -1,4 +1,5 @@
 from requests import get, post, Response
+from ElectricCarsServices.Controller.CarController import CarController
 
 
 class RideController(object):
@@ -42,3 +43,21 @@ class RideController(object):
                 if len(res_json["routes"]) > 0:
                     return float(res_json["routes"][0]["legs"][0]["distance"] / 1000.0)
         return -1.0
+
+
+    @classmethod
+    def car_ride(cls, car_name: str, from_latitude: float, from_longitude: float, to_latitude: float, to_longitude: float):
+        car: dict = CarController.find(car_name)['data']
+        print(car)
+
+        if car == {}:
+            return {"error": "no car found"}
+
+        distance: float = cls.distance_between_point(from_latitude, from_longitude, to_latitude, to_longitude)
+        if distance < 0.0:
+            return {"error": "can t go from A to B with a car"}
+
+        res: dict = cls.ride_time(car['range'], car['charge_time'], 100.0, distance)
+        return {"data": {"ride": res,
+                         "car": car,
+                         "speed": 100.0}}

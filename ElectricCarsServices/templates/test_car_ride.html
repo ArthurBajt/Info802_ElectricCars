@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block title %}Car Ride{% endblock %}
+
+
+{% block main %}
+
+    <div class="m-2">
+        <form method="post">
+            <p>From : <input value="45.764043" min="0" name="from_latitude"> ; <input value="4.835659" min="0" name="from_longitude"></p>
+            <p>To : <input value="43.296482" min="0" name="to_latitude"> ; <input value="5.36978" min="0" name="to_longitude"></p>
+
+            <p>
+                <input value="{{ data.cars.data[0].name }}" name="car_name">
+{#                <select name="car_name" id="car_name">#}
+{#                    {% for c in data.cars.data %}#}
+{#                        <option value="{{ c['name'] }}">{{ c['name'] }} - range: {{ c['range'] }}</option>#}
+{#                    {% endfor %}#}
+{#                </select>#}
+            </p>
+
+            <div class="row m-2 p-2">
+                <input class="col px-1 mx-1" type="submit" value="" formaction="{{ url_for("Ride.car_ride") }}">
+            </div>
+        </form>
+    </div>
+
+{% endblock %}

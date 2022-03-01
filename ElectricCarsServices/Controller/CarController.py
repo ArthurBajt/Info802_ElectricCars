@@ -22,9 +22,8 @@ class CarController(object):
     @classmethod #GET
     def find(cls, name: str) -> dict:
         cursor = cls.collection.find({"name": name}, {'_id': False}).limit(1)
-        if len(list(cursor)) > 0:
-            return {"data": list(cursor)[0]}
-        return {}
+        data: list = list(cursor)
+        return {"data": data[0]}
 
 
     @classmethod #POST
